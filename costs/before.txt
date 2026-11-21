@@ -1,0 +1,51 @@
+Project: main
+
+ Name                                                         Monthly Qty  Unit              Monthly Cost    
+                                                                                                             
+ module.database.aws_db_instance.main                                                                        
+ ├─ Database instance (on-demand, Multi-AZ, db.m7i.large)             730  hours                  $360.62    
+ ├─ Storage (general purpose SSD, gp2)                                200  GB                      $55.20    
+ └─ Additional backup storage                              Monthly cost depends on usage: $0.095 per GB      
+                                                                                                             
+ module.web.aws_instance.web                                                                                 
+ ├─ Instance usage (Linux/UNIX, on-demand, m7i.xlarge)                730  hours                  $183.96    
+ └─ root_block_device                                                                                        
+    └─ Storage (general purpose SSD, gp2)                             200  GB                      $24.00    
+                                                                                                             
+ module.web.aws_ebs_volume.unattached[0]                                                                     
+ └─ Storage (general purpose SSD, gp2)                                500  GB                      $60.00    
+                                                                                                             
+ module.network.aws_nat_gateway.unused[0]                                                                    
+ ├─ NAT gateway                                                       730  hours                   $43.07    
+ └─ Data processed                                         Monthly cost depends on usage: $0.059 per GB      
+                                                                                                             
+ module.storage.aws_cloudwatch_log_group.app                                                                 
+ ├─ Data ingested                                                      20  GB                      $13.40  * 
+ ├─ Archival Storage                                                   50  GB                       $1.65  * 
+ └─ Insights queries data scanned                                       5  GB                       $0.03  * 
+                                                                                                             
+ module.storage.aws_s3_bucket.backups                                                                        
+ └─ Standard                                                                                                 
+    ├─ Storage                                                        500  GB                      $12.50  * 
+    ├─ PUT, COPY, POST, LIST requests                                 100  1k requests              $0.55  * 
+    ├─ GET, SELECT, and all other requests                            500  1k requests              $0.22  * 
+    ├─ Select data scanned                                 Monthly cost depends on usage: $0.00225 per GB    
+    └─ Select data returned                                Monthly cost depends on usage: $0.0008 per GB     
+                                                                                                             
+ module.web.aws_eip.idle[0]                                                                                  
+ └─ IP address (if unused)                                            730  hours                    $3.65    
+                                                                                                             
+ OVERALL TOTAL                                                                                    $758.85 
+
+*Usage costs were estimated using infracost-usage.yml, see docs for other options.
+
+──────────────────────────────────
+21 cloud resources were detected:
+∙ 7 were estimated
+∙ 14 were free
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+┃ Project                                            ┃ Baseline cost ┃ Usage cost* ┃ Total cost ┃
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━┫
+┃ main                                               ┃          $731 ┃         $28 ┃       $759 ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━┛

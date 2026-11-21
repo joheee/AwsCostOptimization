@@ -149,8 +149,8 @@ pandoc (PDF)
 
 ## Definition of done
 
-- [ ] One root module; `before.tfvars` and `after.tfvars` are the only difference, and both plan cleanly.
-- [ ] Baseline Infracost breakdown of `before` saved, with the shared usage file.
+- [x] One root module; `before.tfvars` and `after.tfvars` are the only difference, and both plan cleanly.
+- [x] Baseline Infracost breakdown of `before` saved, with the shared usage file.
 - [ ] `before` deployed, answered a `curl`, load-test CPU saved, destroyed the same day.
 - [ ] One saved Infracost diff per cost lever, each with its monthly saving.
 - [ ] Office-hours schedule stops and starts EC2 and RDS on a deployed `after` (CLI output saved); `after` destroyed the same day.

@@ -1,0 +1,5 @@
+# SCP check, 2026-11-21
+$ aws ec2 describe-instances --region ap-southeast-2 --query "length(Reservations)"
+0
+$ aws sts get-caller-identity --query Arn
+arn:aws:iam::<ACCOUNT>:user/upwork-project

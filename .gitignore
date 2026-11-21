@@ -1,0 +1,14 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfplan
+tfplan
+*-tfplan
+override.tf
+override.tf.json
+*.secret.tfvars
+
+# Infracost key lives in the environment (INFRACOST_API_KEY), never in a file.
+.infracost/

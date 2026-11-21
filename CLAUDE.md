@@ -25,13 +25,16 @@ number" story clearer, and the simpler stack wins over a more complete one.
 
 ## Layout
 
-- Repo root: one Terraform root module. `versions.tf`, `network.tf` (VPC, two
-  public subnets, internet gateway, optional NAT gateway), `web.tf` (EC2,
-  security group, `user_data` with nginx, optional Elastic IP and unattached
-  volume), `database.tf` (RDS, subnet group, security group),
-  `storage.tf` (S3 backup bucket, optional lifecycle rule, log group),
-  `schedule.tf` (EventBridge Scheduler and its role, off in `before`),
+- Repo root: one Terraform root module that wires local child modules.
+  `versions.tf` (providers, backend), `main.tf` (the module calls),
   `variables.tf`, `outputs.tf`.
+- `modules/` (local only, each with `main.tf`, `variables.tf`, `outputs.tf`,
+  `versions.tf`): `network` (VPC, two public subnets, internet gateway,
+  optional NAT gateway), `web` (EC2, security group, `user_data` with nginx,
+  optional Elastic IP and unattached volume), `database` (RDS, subnet group,
+  security group), `storage` (S3 backup bucket, optional lifecycle rule, log
+  group), `schedule` (EventBridge Scheduler and its role, off in `before`).
+  Infracost usage-file keys carry the `module.<name>.` prefix.
 - `before.tfvars`, `after.tfvars`: the only difference between the two sides.
   Non-secret sizing and toggles only.
 - `backend.hcl`: project 1's state bucket, key `cost-case/terraform.tfstate`,

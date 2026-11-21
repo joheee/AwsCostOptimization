@@ -1,0 +1,15 @@
+version: 0.1
+# One usage file shared by both sides, so usage-based items rest on the same
+# assumptions. Values are assumptions for a small app, not measurements.
+resource_usage:
+  module.storage.aws_s3_bucket.backups:
+    standard:
+      storage_gb: 500
+      monthly_tier_1_requests: 100000
+      monthly_tier_2_requests: 500000
+  module.storage.aws_cloudwatch_log_group.app:
+    storage_gb: 50
+    monthly_data_ingested_gb: 20
+    monthly_data_scanned_gb: 5
+  module.network.aws_nat_gateway.unused:
+    monthly_data_processed_gb: 0
