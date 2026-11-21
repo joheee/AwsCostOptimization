@@ -87,6 +87,25 @@ number" story clearer, and the simpler stack wins over a more complete one.
   trailer. Ask before committing or pushing. Push to `main`.
 - Tick the boxes in the GOALS.md "Definition of done" as items are finished.
 
+## Status (end of session 2026-11-21)
+
+- Done and pushed (`0e8f510`): local-module Terraform, both tfvars, usage
+  file, `backend.hcl`, baseline `costs/before.{json,txt}` ($758.85/month,
+  Infracost v0.10.47), `evidence/scp-check.txt` (`DescribeInstances` allowed,
+  so no Fargate fallback). Both var files plan cleanly (21 / 24 resources).
+- Next: `costs/levers.sh` (not written; an attempt was reverted). Plan for it:
+  cumulative levers on `before.tfvars` via `--terraform-var`, one
+  `infracost diff --compare-to` per step into `costs/diff-<nn>-<lever>.txt`,
+  then check the last step equals `after.tfvars`. Levers: EC2 Graviton, RDS
+  rightsize + single-AZ, gp2 to gp3, disk size 200 to 20 GB, NAT, Elastic IP,
+  unattached volume, log retention, S3 lifecycle. `bc` is not installed; use
+  `awk`/`jq`.
+- Infracost prices log retention and the S3 lifecycle at $0 with one shared
+  usage file. Price those two by hand from the price list, with inputs.
+- Then: deploy `before` (about $1/hour, the user applies the saved plan),
+  curl, load test, save CPU, destroy; deploy `after`, test the schedule,
+  destroy; cost table, case study, README.
+
 ## Notes
 
 - Infracost reads the HCL and needs no AWS access. It can't model hours (the

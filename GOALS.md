@@ -139,6 +139,11 @@ Exact sizes are fixed on day 1 so the "before" lands in a believable range
 | 1 | SCP check. Root module, both tfvars, usage file, baseline Infracost. `before` deployed, curl and a short load test, CPU saved, destroyed. |
 | 2 | Lever script with one Infracost diff per step. Scheduler. `after` deployed, schedule tested, destroyed. Cost table, recommendation, case study and PDF, README. Upwork portfolio entry. |
 
+Progress (2026-11-21): day 1 is half done. SCP check passed (EC2 stays), the
+module, both tfvars and the baseline Infracost are pushed, both plans are
+clean. Still to do on day 1: deploy `before`, curl, load test, destroy. The
+lever script is the next piece of day 2 work and can be done before the deploy.
+
 ## Tools and software
 
 Terraform (>= 1.10) with the AWS provider 6.x · Infracost (breakdown, diff,
